@@ -61,11 +61,11 @@
 /* Begin PBXFileReference section */
 		1266C3401266D06000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		138848D0138824C000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		31F1A52A23EB642300E0FF70 /* AudioKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKitUI.framework; sourceTree = "<group>"; };
-		31F1A52B23EB642800E0FF70 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
+		31F1A52A23EB642300E0FF70 /* AudioKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKitUI.framework; path = "Frameworks/AudioKit-macOS/AudioKitUI.framework"; sourceTree = "<group>"; };
+		31F1A52B23EB642800E0FF70 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = "Frameworks/AudioKit-macOS/AudioKit.framework"; sourceTree = "<group>"; };
 		31F1A52E23EB644800E0FF70 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = "../../AudioKit/AudioUnits/iOS/AKExtensionsAUHostV2/Frameworks/AudioKit-macOS/AudioKit.framework"; sourceTree = "<group>"; };
 		31F1A52F23EB644800E0FF70 /* AudioKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKitUI.framework; path = "../../AudioKit/AudioUnits/iOS/AKExtensionsAUHostV2/Frameworks/AudioKit-macOS/AudioKitUI.framework"; sourceTree = "<group>"; };
-		31F1A53023EB644900E0FF70 /* Catalyst */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Catalyst; path = Frameworks/Catalyst; sourceTree = "<group>"; };
+		31F1A53023EB644900E0FF70 /* Catalyst */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Catalyst; path = "Frameworks/AudioKit-macOS/Catalyst"; sourceTree = "<group>"; };
 		39D70F9039D70F5000000001 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 		C404AF0A224E92E900DA7170 /* ComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewController.swift; sourceTree = "<group>"; };
 		C4073D3C22723FAE0049E662 /* AlertExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertExtensions.swift; sourceTree = "<group>"; };
