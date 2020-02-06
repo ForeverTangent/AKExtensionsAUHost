@@ -34,7 +34,6 @@
 		31561C2623EB786A008A8C91 /* BasicSynth1Framework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31561C0A23EB7216008A8C91 /* BasicSynth1Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31561C2823EB7927008A8C91 /* BasicSynth1-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 31561C2323EB7692008A8C91 /* BasicSynth1-Bridging-Header.h */; };
 		31561C2A23EB7CB6008A8C91 /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31561C2923EB7CB6008A8C91 /* CoreAudioKit.framework */; };
-		31561C2C23EB7E28008A8C91 /* BasicSynth1ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31561C2B23EB7E28008A8C91 /* BasicSynth1ViewControllerExtension.swift */; };
 		31F1A52C23EB642800E0FF70 /* AudioKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52A23EB642300E0FF70 /* AudioKitUI.framework */; };
 		31F1A52D23EB642800E0FF70 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52B23EB642800E0FF70 /* AudioKit.framework */; };
 		31F1A53123EB644900E0FF70 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52E23EB644800E0FF70 /* AudioKit.framework */; };
@@ -146,7 +145,6 @@
 		31561C1923EB74AA008A8C91 /* BasicSynth1AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSynth1AudioUnitViewController.swift; sourceTree = "<group>"; };
 		31561C2323EB7692008A8C91 /* BasicSynth1-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BasicSynth1-Bridging-Header.h"; sourceTree = "<group>"; };
 		31561C2923EB7CB6008A8C91 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
-		31561C2B23EB7E28008A8C91 /* BasicSynth1ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSynth1ViewControllerExtension.swift; sourceTree = "<group>"; };
 		31F1A52A23EB642300E0FF70 /* AudioKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKitUI.framework; path = "Frameworks/AudioKit-macOS/AudioKitUI.framework"; sourceTree = "<group>"; };
 		31F1A52B23EB642800E0FF70 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = "Frameworks/AudioKit-macOS/AudioKit.framework"; sourceTree = "<group>"; };
 		31F1A52E23EB644800E0FF70 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = "../../AudioKit/AudioUnits/iOS/AKExtensionsAUHostV2/Frameworks/AudioKit-macOS/AudioKit.framework"; sourceTree = "<group>"; };
@@ -247,8 +245,6 @@
 		31561BE323EB71D9008A8C91 /* BasicSynth1 */ = {
 			isa = PBXGroup;
 			children = (
-				31561C2323EB7692008A8C91 /* BasicSynth1-Bridging-Header.h */,
-				31561C2B23EB7E28008A8C91 /* BasicSynth1ViewControllerExtension.swift */,
 				31561BFD23EB71D9008A8C91 /* Info.plist */,
 			);
 			path = BasicSynth1;
@@ -295,6 +291,7 @@
 		31561C0B23EB7216008A8C91 /* BasicSynth1Framework */ = {
 			isa = PBXGroup;
 			children = (
+				31561C2323EB7692008A8C91 /* BasicSynth1-Bridging-Header.h */,
 				31561BFA23EB71D9008A8C91 /* MainInterface.storyboard */,
 				31561BE423EB71D9008A8C91 /* DSP */,
 				31561BF123EB71D9008A8C91 /* UI */,
@@ -590,7 +587,6 @@
 				31561BF023EB71D9008A8C91 /* BasicSynth1DSPKernel.mm in Sources */,
 				31561BE923EB71D9008A8C91 /* DSPKernel.mm in Sources */,
 				31561C1A23EB74AA008A8C91 /* BasicSynth1AudioUnitViewController.swift in Sources */,
-				31561C2C23EB7E28008A8C91 /* BasicSynth1ViewControllerExtension.swift in Sources */,
 				31561BF823EB71D9008A8C91 /* BasicSynth1Parameters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -683,6 +679,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -722,7 +719,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "BasicSynth1/BasicSynth1-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BasicSynth1Framework/BasicSynth1-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -733,6 +730,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -767,7 +765,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "BasicSynth1/BasicSynth1-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BasicSynth1Framework/BasicSynth1-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
