@@ -8,15 +8,15 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudioKit/AUViewController.h>
-#import "DSPKernel.hpp"
-#import "BufferedAudioBus.hpp"
+#import "AUv3DSPKernel.hpp"
+#import "AUv3BufferedAudioBus.hpp"
 #import "BasicSynth2DSPKernel.hpp"
 #import "BasicSynth2DSPKernelAdapter.h"
 
 @implementation BasicSynth2DSPKernelAdapter {
     // C++ members need to be ivars; they would be copied on access if they were properties.
     BasicSynth2DSPKernel  _kernel;
-    BufferedInputBus _inputBus;
+	AUv3BufferedInputBus _inputBus;
 }
 
 - (instancetype)init {
@@ -84,7 +84,7 @@
      */
     // Specify captured objects are mutable.
     __block BasicSynth2DSPKernel *state = &_kernel;
-    __block BufferedInputBus *input = &_inputBus;
+	__block AUv3BufferedInputBus *input = &_inputBus;
 
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags,
                               const AudioTimeStamp       *timestamp,

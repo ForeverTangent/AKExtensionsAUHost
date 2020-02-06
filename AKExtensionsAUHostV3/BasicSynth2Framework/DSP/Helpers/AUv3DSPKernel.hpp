@@ -13,7 +13,7 @@
 #import <algorithm>
 
 // Put your DSP code into a subclass of DSPKernel.
-class DSPKernel {
+class AUv3DSPKernel {
 public:
     virtual void process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) = 0;
 

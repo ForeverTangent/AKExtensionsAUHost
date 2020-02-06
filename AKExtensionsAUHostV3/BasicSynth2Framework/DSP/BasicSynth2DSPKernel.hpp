@@ -9,7 +9,7 @@
 #ifndef BasicSynth2DSPKernel_hpp
 #define BasicSynth2DSPKernel_hpp
 
-#import "DSPKernel.hpp"
+#import "AUv3DSPKernel.hpp"
 
 enum {
     paramOne = 0,
@@ -20,7 +20,7 @@ enum {
  Performs simple copying of the input signal to the output.
  As a non-ObjC class, this is safe to use from render thread.
  */
-class BasicSynth2DSPKernel : public DSPKernel {
+class BasicSynth2DSPKernel : public AUv3DSPKernel {
 public:
     
     // MARK: Member Functions

@@ -14,7 +14,7 @@
 // Utility classes to manage audio formats and buffers for an audio unit implementation's input and output audio busses.
 
 // Reusable non-ObjC class, accessible from render thread.
-struct BufferedAudioBus {
+struct AUv3BufferedAudioBus {
     AUAudioUnitBus* bus = nullptr;
     AUAudioFrameCount maxFrames = 0;
     
@@ -58,7 +58,7 @@ struct BufferedAudioBus {
  This class provides a prepareOutputBufferList method to copy the internal buffer pointers
  to the output buffer list in case the client passed in null buffer pointers.
  */
-struct BufferedOutputBus: BufferedAudioBus {
+struct AUv3BufferedOutputBus: AUv3BufferedAudioBus {
     void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount frameCount, bool zeroFill) {
         UInt32 byteSize = frameCount * sizeof(float);
         for (UInt32 i = 0; i < outBufferList->mNumberBuffers; ++i) {
@@ -83,7 +83,7 @@ struct BufferedOutputBus: BufferedAudioBus {
  This class manages a buffer into which an audio unit with input busses can
  pull its input data.
  */
-struct BufferedInputBus : BufferedAudioBus {
+struct AUv3BufferedInputBus : AUv3BufferedAudioBus {
     /*
      Gets input data for this input by preparing the input buffer list and pulling
      the pullInputBlock.

@@ -6,9 +6,9 @@
 //  Copyright © 2020 Apple. All rights reserved.
 //
 
-#import "DSPKernel.hpp"
+#import "AUv3DSPKernel.hpp"
 
-void DSPKernel::handleOneEvent(AURenderEvent const *event) {
+void AUv3DSPKernel::handleOneEvent(AURenderEvent const *event) {
     switch (event->head.eventType) {
         case AURenderEventParameter: {
             handleParameterEvent(event->parameter);
@@ -24,7 +24,7 @@ void DSPKernel::handleOneEvent(AURenderEvent const *event) {
     }
 }
 
-void DSPKernel::performAllSimultaneousEvents(AUEventSampleTime now, AURenderEvent const *&event, AUMIDIOutputEventBlock midiOut) {
+void AUv3DSPKernel::performAllSimultaneousEvents(AUEventSampleTime now, AURenderEvent const *&event, AUMIDIOutputEventBlock midiOut) {
     do {
         handleOneEvent(event);
 
@@ -44,7 +44,7 @@ void DSPKernel::performAllSimultaneousEvents(AUEventSampleTime now, AURenderEven
  This function handles the event list processing and rendering loop for you.
  Call it inside your internalRenderBlock.
  */
-void DSPKernel::processWithEvents(AudioTimeStamp const *timestamp, AUAudioFrameCount frameCount, AURenderEvent const *events, AUMIDIOutputEventBlock midiOut) {
+void AUv3DSPKernel::processWithEvents(AudioTimeStamp const *timestamp, AUAudioFrameCount frameCount, AURenderEvent const *events, AUMIDIOutputEventBlock midiOut) {
 
     AUEventSampleTime now = AUEventSampleTime(timestamp->mSampleTime);
     AUAudioFrameCount framesRemaining = frameCount;
