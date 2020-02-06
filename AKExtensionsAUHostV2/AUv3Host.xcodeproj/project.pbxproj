@@ -245,6 +245,7 @@
 		31561BE323EB71D9008A8C91 /* BasicSynth1 */ = {
 			isa = PBXGroup;
 			children = (
+				31561C2323EB7692008A8C91 /* BasicSynth1-Bridging-Header.h */,
 				31561BFD23EB71D9008A8C91 /* Info.plist */,
 			);
 			path = BasicSynth1;
@@ -291,7 +292,6 @@
 		31561C0B23EB7216008A8C91 /* BasicSynth1Framework */ = {
 			isa = PBXGroup;
 			children = (
-				31561C2323EB7692008A8C91 /* BasicSynth1-Bridging-Header.h */,
 				31561BFA23EB71D9008A8C91 /* MainInterface.storyboard */,
 				31561BE423EB71D9008A8C91 /* DSP */,
 				31561BF123EB71D9008A8C91 /* UI */,
@@ -719,7 +719,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "BasicSynth1Framework/BasicSynth1-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BasicSynth1/BasicSynth1-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -765,7 +765,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "BasicSynth1Framework/BasicSynth1-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BasicSynth1/BasicSynth1-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -823,6 +823,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -876,6 +877,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
