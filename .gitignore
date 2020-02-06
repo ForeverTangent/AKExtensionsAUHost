@@ -1,3 +1,9 @@
 AKExtensionsAUHostV2/BUILDS
 AKExtensionsAUHostV2/Frameworks/AudioKit-iOS
 AKExtensionsAUHostV2/Frameworks/AudioKit-macOS
+AKExtensionsAUHostV3/BUILDS
+AKExtensionsAUHostV1/BUILDS
+AKExtensionsAUHostV1/Frameworks/AudioKit-iOS
+AKExtensionsAUHostV1/Frameworks/AudioKit-macOS
+AKExtensionsAUHostV3/Frameworks/AudioKit-iOS
+AKExtensionsAUHostV3/Frameworks/AudioKit-macOS
