@@ -8,8 +8,8 @@
 
 import CoreAudioKit
 
-class BasicSynth1AudioUnitViewController: AUViewController {
-	var audioUnit: AUAudioUnit?
+open class BasicSynth1AudioUnitViewController: AUViewController {
+	public var audioUnit: AUAudioUnit?
 
 	public override func viewDidLoad() {
 		super.viewDidLoad()
@@ -24,19 +24,3 @@ class BasicSynth1AudioUnitViewController: AUViewController {
 }
 
 
-/*
-Abstract:
-AUv3FilterDemoViewController is the app extension's principal class, responsible for creating both the audio unit and its view.
-*/
-
-//import CoreAudioKit
-//import BasicSynth1Framework
-
-extension BasicSynth1AudioUnitViewController: AUAudioUnitFactory {
-
-	public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-		audioUnit = try BasicSynth1AudioUnit(componentDescription: componentDescription, options: [])
-		return audioUnit!
-	}
-
-}

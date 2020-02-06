@@ -11,7 +11,7 @@ import AudioToolbox
 import AVFoundation
 import CoreAudioKit
 
-public class BasicSynth1AudioUnit: AUAudioUnit {
+public class BasicSynth1: AUAudioUnit {
 
     private let parameters: BasicSynth1Parameters
     private let kernelAdapter: BasicSynth1DSPKernelAdapter

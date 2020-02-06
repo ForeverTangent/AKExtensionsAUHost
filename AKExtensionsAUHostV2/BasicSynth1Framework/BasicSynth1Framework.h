@@ -16,6 +16,6 @@ FOUNDATION_EXPORT const unsigned char BasicSynth1FrameworkVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <BasicSynth1Framework/PublicHeader.h>
 #import <BasicSynth1Framework/BasicSynth1DSPKernelAdapter.h>
-@class BasicSynth1AudioUnit;
+@class BasicSynth1;
 @class BasicSynth1AudioUnitViewController;
 
