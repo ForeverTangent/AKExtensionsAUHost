@@ -8,7 +8,7 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 
-@class AudioUnitViewController;
+@class BasicSynth1AudioUnitViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
