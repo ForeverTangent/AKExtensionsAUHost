@@ -1,0 +1,5 @@
+module CSoundpipe [system] {
+    header "/usr/local/include/soundpipe.h"
+    link "soundpipe"
+    export *
+}

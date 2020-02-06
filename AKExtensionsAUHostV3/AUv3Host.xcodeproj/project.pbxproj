@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		31638A6023EC7A79001D6534 /* BasicSynth2MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31C79C3523EC73D30094A94A /* BasicSynth2MainInterface.storyboard */; };
+		316398E723ECB3AC001D6534 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52E23EB644800E0FF70 /* AudioKit.framework */; };
+		316398E823ECB3AC001D6534 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52E23EB644800E0FF70 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		316398E923ECB3AC001D6534 /* AudioKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52F23EB644800E0FF70 /* AudioKitUI.framework */; };
+		316398EA23ECB3AC001D6534 /* AudioKitUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52F23EB644800E0FF70 /* AudioKitUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31C79C3B23EC73D30094A94A /* BasicSynth2.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 31C79C1D23EC73D30094A94A /* BasicSynth2.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		31C79C4923EC745C0094A94A /* BasicSynth2Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C79C4723EC745C0094A94A /* BasicSynth2Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		31C79C4C23EC745C0094A94A /* BasicSynth2Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C79C4523EC745C0094A94A /* BasicSynth2Framework.framework */; };
@@ -99,6 +103,18 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		316398EB23ECB3AC001D6534 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				316398EA23ECB3AC001D6534 /* AudioKitUI.framework in Embed Frameworks */,
+				316398E823ECB3AC001D6534 /* AudioKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		31C79C3C23EC73D30094A94A /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,6 +200,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				316398E923ECB3AC001D6534 /* AudioKitUI.framework in Frameworks */,
+				316398E723ECB3AC001D6534 /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +451,7 @@
 				31C79C4123EC745C0094A94A /* Sources */,
 				31C79C4223EC745C0094A94A /* Frameworks */,
 				31C79C4323EC745C0094A94A /* Resources */,
+				316398EB23ECB3AC001D6534 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -792,6 +811,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/AudioKit-iOS/";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -851,6 +871,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/AudioKit-iOS/";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
