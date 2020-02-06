@@ -21,6 +21,7 @@
 		31561C2023EB7561008A8C91 /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31561BE823EB71D9008A8C91 /* DSPKernel.mm */; };
 		31561C2123EB7563008A8C91 /* BufferedAudioBus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 31561BEA23EB71D9008A8C91 /* BufferedAudioBus.hpp */; };
 		31561C2223EB756C008A8C91 /* BasicSynth1Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31561BF723EB71D9008A8C91 /* BasicSynth1Parameters.swift */; };
+		31638A5F23EC7A6B001D6534 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31561BFA23EB71D9008A8C91 /* MainInterface.storyboard */; };
 		31AB311F23EC633500C83823 /* BasicSynth1AudioUnitViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AB311E23EC633500C83823 /* BasicSynth1AudioUnitViewControllerExtension.swift */; };
 		31AB312023EC63A200C83823 /* BasicSynth1Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31561C0A23EB7216008A8C91 /* BasicSynth1Framework.framework */; };
 		31F1A52C23EB642800E0FF70 /* AudioKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52A23EB642300E0FF70 /* AudioKitUI.framework */; };
@@ -524,6 +525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31638A5F23EC7A6B001D6534 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
