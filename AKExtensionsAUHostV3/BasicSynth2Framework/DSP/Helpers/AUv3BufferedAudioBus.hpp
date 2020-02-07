@@ -13,6 +13,9 @@
 //MARK:- BufferedAudioBus Utility Class
 // Utility classes to manage audio formats and buffers for an audio unit implementation's input and output audio busses.
 
+// I just renamed this class from BufferedAudioBus -> AUv3BufferedAudioBusto differentiate it from the previous BufferedAudioBus
+// Xcode AU Generator used to make, and that is also found in the current AudioKit.
+
 // Reusable non-ObjC class, accessible from render thread.
 struct AUv3BufferedAudioBus {
     AUAudioUnitBus* bus = nullptr;

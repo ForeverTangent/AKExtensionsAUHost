@@ -12,6 +12,7 @@
 		316398F023ECBAE7001D6534 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52E23EB644800E0FF70 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		316398F123ECBAE7001D6534 /* AudioKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52F23EB644800E0FF70 /* AudioKitUI.framework */; };
 		316398F223ECBAE7001D6534 /* AudioKitUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52F23EB644800E0FF70 /* AudioKitUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		316398F523ECBBB2001D6534 /* BasicSynth2DSPKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 316398F423ECBBB2001D6534 /* BasicSynth2DSPKernelAdapter.mm */; };
 		31C79C3B23EC73D30094A94A /* BasicSynth2.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 31C79C1D23EC73D30094A94A /* BasicSynth2.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		31C79C4923EC745C0094A94A /* BasicSynth2Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C79C4723EC745C0094A94A /* BasicSynth2Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		31C79C4C23EC745C0094A94A /* BasicSynth2Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C79C4523EC745C0094A94A /* BasicSynth2Framework.framework */; };
@@ -26,7 +27,7 @@
 		31C79C5923EC75D20094A94A /* BasicSynth2DSPKernelAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C79C2723EC73D30094A94A /* BasicSynth2DSPKernelAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		31C79C5A23EC75D50094A94A /* BasicSynth2AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C79C2D23EC73D30094A94A /* BasicSynth2AudioUnitViewController.swift */; };
 		31C79C5B23EC75D70094A94A /* BasicSynth2AudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C79C3023EC73D30094A94A /* BasicSynth2AudioUnit.swift */; };
-		31C79C5C23EC75DA0094A94A /* BasicSynth2Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C79C3223EC73D30094A94A /* BasicSynth2Parameters.swift */; };
+		31C79C5C23EC75DA0094A94A /* BasicSynth2AudioUnitParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C79C3223EC73D30094A94A /* BasicSynth2AudioUnitParameters.swift */; };
 		31C79C5D23EC774A0094A94A /* BasicSynth2Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C79C4523EC745C0094A94A /* BasicSynth2Framework.framework */; };
 		31C79C5E23EC774A0094A94A /* BasicSynth2Framework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31C79C4523EC745C0094A94A /* BasicSynth2Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31F1A52C23EB642800E0FF70 /* AudioKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52A23EB642300E0FF70 /* AudioKitUI.framework */; };
@@ -142,6 +143,7 @@
 /* Begin PBXFileReference section */
 		1266C3401266D06000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		138848D0138824C000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		316398F423ECBBB2001D6534 /* BasicSynth2DSPKernelAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BasicSynth2DSPKernelAdapter.mm; sourceTree = "<group>"; };
 		31C79C1D23EC73D30094A94A /* BasicSynth2.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BasicSynth2.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		31C79C2123EC73D30094A94A /* AUv3DSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AUv3DSPKernel.hpp; sourceTree = "<group>"; };
 		31C79C2323EC73D30094A94A /* AUv3DSPKernel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AUv3DSPKernel.mm; sourceTree = "<group>"; };
@@ -151,7 +153,7 @@
 		31C79C2A23EC73D30094A94A /* BasicSynth2DSPKernel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BasicSynth2DSPKernel.mm; sourceTree = "<group>"; };
 		31C79C2D23EC73D30094A94A /* BasicSynth2AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSynth2AudioUnitViewController.swift; sourceTree = "<group>"; };
 		31C79C3023EC73D30094A94A /* BasicSynth2AudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSynth2AudioUnit.swift; sourceTree = "<group>"; };
-		31C79C3223EC73D30094A94A /* BasicSynth2Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSynth2Parameters.swift; sourceTree = "<group>"; };
+		31C79C3223EC73D30094A94A /* BasicSynth2AudioUnitParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSynth2AudioUnitParameters.swift; sourceTree = "<group>"; };
 		31C79C3623EC73D30094A94A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BasicSynth2MainInterface.storyboard; sourceTree = "<group>"; };
 		31C79C3823EC73D30094A94A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31C79C4523EC745C0094A94A /* BasicSynth2Framework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BasicSynth2Framework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,6 +283,7 @@
 				31C79C2323EC73D30094A94A /* AUv3DSPKernel.mm */,
 				31C79C2523EC73D30094A94A /* AUv3BufferedAudioBus.hpp */,
 				31C79C2723EC73D30094A94A /* BasicSynth2DSPKernelAdapter.h */,
+				316398F423ECBBB2001D6534 /* BasicSynth2DSPKernelAdapter.mm */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -298,7 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				31C79C3023EC73D30094A94A /* BasicSynth2AudioUnit.swift */,
-				31C79C3223EC73D30094A94A /* BasicSynth2Parameters.swift */,
+				31C79C3223EC73D30094A94A /* BasicSynth2AudioUnitParameters.swift */,
 			);
 			path = "Audio Unit";
 			sourceTree = "<group>";
@@ -604,7 +607,8 @@
 			files = (
 				31C79C5723EC75CD0094A94A /* AUv3DSPKernel.mm in Sources */,
 				31C79C5B23EC75D70094A94A /* BasicSynth2AudioUnit.swift in Sources */,
-				31C79C5C23EC75DA0094A94A /* BasicSynth2Parameters.swift in Sources */,
+				31C79C5C23EC75DA0094A94A /* BasicSynth2AudioUnitParameters.swift in Sources */,
+				316398F523ECBBB2001D6534 /* BasicSynth2DSPKernelAdapter.mm in Sources */,
 				31C79C5523EC75C30094A94A /* BasicSynth2DSPKernel.mm in Sources */,
 				31C79C5A23EC75D50094A94A /* BasicSynth2AudioUnitViewController.swift in Sources */,
 			);

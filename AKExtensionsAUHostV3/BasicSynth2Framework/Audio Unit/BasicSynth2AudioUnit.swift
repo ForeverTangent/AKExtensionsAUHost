@@ -13,7 +13,7 @@ import CoreAudioKit
 
 public class BasicSynth2AudioUnit: AUAudioUnit {
 
-    private let parameters: BasicSynth2Parameters
+    private let parameters: BasicSynth2AudioUnitParameters
     private let kernelAdapter: BasicSynth2DSPKernelAdapter
 
     lazy private var inputBusArray: AUAudioUnitBusArray = {
@@ -53,7 +53,7 @@ public class BasicSynth2AudioUnit: AUAudioUnit {
         kernelAdapter = BasicSynth2DSPKernelAdapter()
 
         // Create parameters object to control paramOne
-        parameters = BasicSynth2Parameters(kernelAdapter: kernelAdapter)
+        parameters = BasicSynth2AudioUnitParameters(kernelAdapter: kernelAdapter)
         
         // Init super class
         try super.init(componentDescription: componentDescription, options: options)

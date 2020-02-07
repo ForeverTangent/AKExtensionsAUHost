@@ -10,7 +10,7 @@ import Foundation
 import AudioToolbox
 
 /// Manages the BasicSynth2 object's paramOne.
-class BasicSynth2Parameters {
+class BasicSynth2AudioUnitParameters {
 
     private enum BasicSynth2Param: AUParameterAddress {
         case paramOne

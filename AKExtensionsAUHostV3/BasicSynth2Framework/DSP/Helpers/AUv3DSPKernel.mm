@@ -8,6 +8,9 @@
 
 #import "AUv3DSPKernel.hpp"
 
+// I just renamed this class from DSPKernel -> AUv3DSPKernel to differentiate it from the previous DSPKernel
+// Xcode AU Generator used to make, and that is also found in the current AudioKit.
+
 void AUv3DSPKernel::handleOneEvent(AURenderEvent const *event) {
     switch (event->head.eventType) {
         case AURenderEventParameter: {

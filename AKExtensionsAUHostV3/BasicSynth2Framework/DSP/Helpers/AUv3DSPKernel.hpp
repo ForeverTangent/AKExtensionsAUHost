@@ -6,16 +6,19 @@
 //  Copyright © 2020 Apple. All rights reserved.
 //
 
-#ifndef DSPKernel_h
-#define DSPKernel_h
+#ifndef AUv3DSPKernel_h
+#define AUv3DSPKernel_h
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <algorithm>
 
 // Put your DSP code into a subclass of DSPKernel.
+// I just renamed this class from DSPKernel -> AUv3DSPKernel to differentiate it from the previous DSPKernel
+// Xcode AU Generator used to make, and that is also found in the current AudioKit.
 class AUv3DSPKernel {
 public:
     virtual void process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) = 0;
+//    virtual void startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) = 0;
 
     // Override to handle MIDI events.
     virtual void handleMIDIEvent(AUMIDIEvent const& midiEvent) {}
