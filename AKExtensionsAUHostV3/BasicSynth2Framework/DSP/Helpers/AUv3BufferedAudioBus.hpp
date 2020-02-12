@@ -18,11 +18,12 @@
 
 // Reusable non-ObjC class, accessible from render thread.
 struct AUv3BufferedAudioBus {
-    AUAudioUnitBus* bus = nullptr;
+
+	AUAudioUnitBus* bus = nullptr;
     AUAudioFrameCount maxFrames = 0;
-    
+
     AVAudioPCMBuffer* pcmBuffer = nullptr;
-    
+
     AudioBufferList const* originalAudioBufferList = nullptr;
     AudioBufferList* mutableAudioBufferList = nullptr;
 
@@ -38,6 +39,9 @@ struct AUv3BufferedAudioBus {
     }
 
     void allocateRenderResources(AUAudioFrameCount inMaxFrames) {
+
+		std::cout << "AUv3BufferedAudioBus allocateRenderResources" << std::endl;
+
         maxFrames = inMaxFrames;
 
         pcmBuffer = [[AVAudioPCMBuffer alloc] initWithPCMFormat:bus.format frameCapacity: maxFrames];
@@ -45,24 +49,28 @@ struct AUv3BufferedAudioBus {
         originalAudioBufferList = pcmBuffer.audioBufferList;
         mutableAudioBufferList = pcmBuffer.mutableAudioBufferList;
     }
-    
+
     void deallocateRenderResources() {
+
+		std::cout << "AUv3BufferedAudioBus deallocateRenderResources" << std::endl;
+
         pcmBuffer = nullptr;
         originalAudioBufferList = nullptr;
         mutableAudioBufferList = nullptr;
     }
 };
 
+
 // MARK:-  BufferedOutputBus: BufferedAudioBus
 // MARK: prepareOutputBufferList()
 /*
  BufferedOutputBus
- 
+
  This class provides a prepareOutputBufferList method to copy the internal buffer pointers
  to the output buffer list in case the client passed in null buffer pointers.
  */
 struct AUv3BufferedOutputBus: AUv3BufferedAudioBus {
-    void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount frameCount, bool zeroFill) {
+    void prepareOutputBufferList(AudioBufferList *outBufferList, AVAudioFrameCount frameCount, bool zeroFill) {
         UInt32 byteSize = frameCount * sizeof(float);
         for (UInt32 i = 0; i < outBufferList->mNumberBuffers; ++i) {
             outBufferList->mBuffers[i].mNumberChannels = originalAudioBufferList->mBuffers[i].mNumberChannels;
@@ -82,7 +90,7 @@ struct AUv3BufferedOutputBus: AUv3BufferedAudioBus {
 // MARK: prepareInputBufferList()
 /*
  BufferedInputBus
- 
+
  This class manages a buffer into which an audio unit with input busses can
  pull its input data.
  */
@@ -99,7 +107,7 @@ struct AUv3BufferedInputBus : AUv3BufferedAudioBus {
         if (pullInputBlock == nullptr) {
             return kAudioUnitErr_NoConnection;
         }
-        
+
         /*
          Important:
          The Audio Unit must supply valid buffers in (inputData->mBuffers[x].mData) and mDataByteSize.
@@ -116,11 +124,11 @@ struct AUv3BufferedInputBus : AUv3BufferedAudioBus {
 
         return pullInputBlock(actionFlags, timestamp, frameCount, inputBusNumber, mutableAudioBufferList);
     }
-    
+
     /*
      prepareInputBufferList populates the mutableAudioBufferList with the data
      pointers from the originalAudioBufferList.
-     
+
      The upstream audio unit may overwrite these with its own pointers, so each
      render cycle this function needs to be called to reset them.
      */

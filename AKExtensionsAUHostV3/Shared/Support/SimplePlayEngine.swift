@@ -326,7 +326,7 @@ public class SimplePlayEngine {
             guard let theNoteBlock = audioUnit.scheduleMIDIEventBlock else { return nil }
             noteBlock = theNoteBlock
 
-			setUpAKMidi()
+//			setUpAKMidi()
         }
 
 		func midiPlay() {
@@ -424,7 +424,7 @@ public class SimplePlayEngine {
                         cbytes[2] = 64
                         self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
 
-                        usleep(useconds_t(0.2 * 1e6))
+						usleep(useconds_t(1.2 * 1e6)) // Note Length
 
                         cbytes[2] = 0    // note off
                         self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)

@@ -16,22 +16,11 @@ public class BasicSynth2AudioUnit: AUAudioUnit {
     private let parameters: BasicSynth2AudioUnitParameters
     private let kernelAdapter: BasicSynth2DSPKernelAdapter
 
-    lazy private var inputBusArray: AUAudioUnitBusArray = {
-        AUAudioUnitBusArray(audioUnit: self,
-                            busType: .input,
-                            busses: [kernelAdapter.inputBus])
-    }()
-
     lazy private var outputBusArray: AUAudioUnitBusArray = {
         AUAudioUnitBusArray(audioUnit: self,
                             busType: .output,
                             busses: [kernelAdapter.outputBus])
     }()
-    
-    /// The units input busses
-    public override var inputBusses: AUAudioUnitBusArray {
-        return inputBusArray
-    }
 
     /// The units output busses
     public override var outputBusses: AUAudioUnitBusArray {
@@ -91,14 +80,17 @@ public class BasicSynth2AudioUnit: AUAudioUnit {
 
     public override func allocateRenderResources() throws {
 
-        if kernelAdapter.outputBus.format.channelCount == kernelAdapter.inputBus.format.channelCount {
+        if kernelAdapter.outputBus.format.channelCount >= 0 {
+
+			NSLog("BasicSynth2AudioUnit allocateRenderResources")
+
         	try super.allocateRenderResources()
 
-	        kernelAdapter.allocateRenderResources()
+			kernelAdapter.allocateRenderResources()
             return
         }
 
-    	throw NSError(domain: NSOSStatusErrorDomain, code: Int(kAudioUnitErr_FormatNotSupported), userInfo: nil)
+//    	throw NSError(domain: NSOSStatusErrorDomain, code: Int(kAudioUnitErr_FormatNotSupported), userInfo: nil)
     }
 
     public override func deallocateRenderResources() {
