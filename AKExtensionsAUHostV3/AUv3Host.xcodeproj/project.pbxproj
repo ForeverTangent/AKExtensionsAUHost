@@ -30,10 +30,6 @@
 		31C79C5C23EC75DA0094A94A /* BasicSynth2AudioUnitParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C79C3223EC73D30094A94A /* BasicSynth2AudioUnitParameters.swift */; };
 		31C79C5D23EC774A0094A94A /* BasicSynth2Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C79C4523EC745C0094A94A /* BasicSynth2Framework.framework */; };
 		31C79C5E23EC774A0094A94A /* BasicSynth2Framework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31C79C4523EC745C0094A94A /* BasicSynth2Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		31F1193023F5B4A400919563 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52E23EB644800E0FF70 /* AudioKit.framework */; };
-		31F1193123F5B4A400919563 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52E23EB644800E0FF70 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		31F1193223F5B4A600919563 /* AudioKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52F23EB644800E0FF70 /* AudioKitUI.framework */; };
-		31F1193323F5B4A600919563 /* AudioKitUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52F23EB644800E0FF70 /* AudioKitUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31F1A53123EB644900E0FF70 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52E23EB644800E0FF70 /* AudioKit.framework */; };
 		31F1A53223EB644900E0FF70 /* AudioKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52F23EB644800E0FF70 /* AudioKitUI.framework */; };
 		31F1A53323EB644900E0FF70 /* Catalyst in Resources */ = {isa = PBXBuildFile; fileRef = 31F1A53023EB644900E0FF70 /* Catalyst */; };
@@ -103,8 +99,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				31F1193323F5B4A600919563 /* AudioKitUI.framework in Embed Frameworks */,
-				31F1193123F5B4A400919563 /* AudioKit.framework in Embed Frameworks */,
 				31C79C4D23EC745C0094A94A /* BasicSynth2Framework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -215,8 +209,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31F1193223F5B4A600919563 /* AudioKitUI.framework in Frameworks */,
-				31F1193023F5B4A400919563 /* AudioKit.framework in Frameworks */,
 				31C79C4C23EC745C0094A94A /* BasicSynth2Framework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
