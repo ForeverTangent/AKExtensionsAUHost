@@ -54,7 +54,8 @@ public class SimplePlayEngine {
 
     public init() {
 
-		setUpAKMidi()
+
+//		setUpAKMidi()
 
         engine.attach(player)
 
@@ -152,6 +153,9 @@ public class SimplePlayEngine {
 		}
 
 		if isInstrument {
+			akMidi.openInput()
+			akMidi.addListener(self)
+
 			instrumentPlayer = InstrumentPlayer(audioUnit: activeAVAudioUnit?.auAudioUnit)
 		}
 
@@ -385,11 +389,12 @@ public class SimplePlayEngine {
 				cbytes[0] = 0xB0 // status note on/off
 				cbytes[1] = cc // note
 				cbytes[2] = data // velocity
+
 				self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
 
-				self.synced(self.isDone) {
-					self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
-				} // while isPlaying
+//				self.synced(self.isDone) {
+//					self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
+//				} // while isPlaying
 
 				self.isDone = true
 				cbytes.deallocate()
@@ -412,11 +417,12 @@ public class SimplePlayEngine {
 				cbytes[0] = on ? 0x90 : 0x80 // status note on/off
 				cbytes[1] = noteNumber // note
 				cbytes[2] = velocity // velocity
+
 				self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
 
-				self.synced(self.isDone) {
-					self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
-				} // while isPlaying
+//				self.synced(self.isDone) {
+//					self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
+//				} // while isPlaying
 
 				self.isDone = true
 				cbytes.deallocate()
