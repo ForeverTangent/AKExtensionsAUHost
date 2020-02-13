@@ -20,8 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) AUAudioFrameCount maximumFramesToRender;
 
 @property AUAudioUnitBus * _Nonnull outputBus;
-@property AUAudioUnitBusArray * _Nonnull outputBusArray;
-
 @property AVAudioFormat * _Nonnull defaultFormat;
 
 @property (readonly) BOOL isPlaying;

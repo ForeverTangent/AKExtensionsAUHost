@@ -24,8 +24,6 @@
 	// C++ members need to be ivars; they would be copied on access if they were properties.
 	BasicSynth2DSPKernel _kernel;
 	AUv3BufferedOutputBus _outputBusBuffer;
-	AUAudioUnitBusArray *_outputBusArray;
-	AUParameterTree *_parameterTree;
 }
 
 
@@ -90,19 +88,6 @@
 	_kernel.reset();
 }
 
-//- (BOOL)allocateRenderResourcesAndReturnError:(NSError **)outError {
-//
-//	NSLog(@"BasicSynth2DSPKernelAdapter allocateRenderResources BOOL ^^^");
-//
-////	if (![super allocateRenderResourcesAndReturnError:outError]) {
-////		return NO;
-////	}
-//
-//	_outputBusBuffer.allocateRenderResources(self.maximumFramesToRender);
-//	_kernel.init(self.outputBus.format.channelCount, self.outputBus.format.sampleRate);
-//	_kernel.reset();
-//	return YES;
-//}
 
 - (void)deallocateRenderResources {
 	NSLog(@"BasicSynth2DSPKernelAdapter deallocateRenderResources");

@@ -25,14 +25,13 @@ public class BasicSynth2AudioUnit: AUAudioUnit {
                             busses: [kernelAdapter.outputBus])
     }()
 
+	// The owning view controller
+	weak var viewController: BasicSynth2AudioUnitViewController?
+
     /// The unit's output busses
     public override var outputBusses: AUAudioUnitBusArray {
         return outputBusArray
     }
-
-	// The owning view controller
-	weak var viewController: BasicSynth2AudioUnitViewController?
-
 
     /// The tree of parameters provided by this AU.
     public override var parameterTree: AUParameterTree? {
