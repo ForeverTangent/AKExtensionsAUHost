@@ -55,189 +55,66 @@ protected:
 	sp_butlp *filter;
 	sp_adsr *filterEnv;
 
-
-
-
-//	struct NoteState {
-
-		// linked-list management
-//		NoteState *next;
-//		NoteState *prev;
-
-//		BasicSynth2DSPKernel *kernel;
-//
-//		enum { stageOff, stageOn, stageRelease };
-//		int stage = stageOff;
-//
-//		float internalGate = 0;
-//		float amp = 0;
-//		float filterAmp = 0;
-//
-//		sp_blsquare *blsquare;
-//		sp_adsr *adsr;
-//		sp_butlp *filter;
-//		sp_adsr *filterEnv;
-
-//		NoteState() {
-//			sp_blsquare_create(&blsquare);
-//			sp_adsr_create(&adsr);
-//			sp_butlp_create(&filter);
-//			sp_adsr_create(&filterEnv);
-//		}
-
-//		~NoteState() {
-//			sp_blsquare_destroy(&blsquare);
-//			sp_adsr_destroy(&adsr);
-//			sp_butlp_destroy(&filter);
-//			sp_adsr_destroy(&filterEnv);
-//		}
-
-//		void init() {
-//			sp_adsr_create(&adsr);
-//			sp_adsr_init(kernel->getSpData(), adsr);
-//			sp_blsquare_init(kernel->getSpData(), blsquare);
-//			*blsquare->freq = 0;
-//			*blsquare->amp = 0;
-//			*blsquare->width = 0.5;
-//
-//			sp_adsr_init(kernel->getSpData(), filterEnv);
-//			sp_butlp_init(kernel->getSpData(), filter);
-//			filter->freq = 22050.0;
-//		}
-
-//		void add() {
-//			init();
-//			prev = nullptr;
-//			next = kernel->playingNotes;
-//			if (next) next->prev = this;
-//			kernel->playingNotes = this;
-//			++kernel->playingNotesCount;
-//		}
-
-//		void remove() {
-//			if (prev) prev->next = next;
-//			else kernel->playingNotes = next;
-//			if (next) next->prev = prev;
-//			--kernel->playingNotesCount;
-//		}
-
-//	};
-
+	float width;
 
 public:
-
-//	enum BasicSynth2Addresses {
-//		attackDurationAddress = 0,
-//		decayDurationAddress,
-//		sustainLevelAddress,
-//		releaseDurationAddress,
-//		pitchBendAddress,
-//		pulseWidthAddress,
-////		vibratoDepthAddress,
-////		vibratoRateAddress,
-//		filterCutoffFrequencyAddress,
-////		filterResonanceAddress,
-//		filterAttackDurationAddress,
-//		filterDecayDurationAddress,
-//		filterSustainLevelAddress,
-//		filterReleaseDurationAddress,
-//		filterEnvelopeStrengthAddress,
-////		filterLFODepthAddress,
-////		filterLFORateAddress,
-//		numberOfFilterSynthEnumElements
-//	};
-
 	bool resetted = false;
 
-//	int playingNotesCount = 0;
-
 	float getSampleRate() { return sampleRate; }
+
+	int currentNoteNumber = 0;
+
 	float attackDuration = 0.1;
 	float decayDuration = 0.1;
 	float sustainLevel = 1.0;
 	float releaseDuration = 0.1;
 	float pitchBend = 0;
 	float pulseWidth = 0.5;
-//	float vibratoDepth = 0;
-//	float vibratoRate = 0;
 	float filterCutoffFrequency = 22050.0;
-//	float filterResonance = 0.0;
 	float filterAttackDuration = 0.1;
 	float filterDecayDuration = 0.1;
 	float filterSustainLevel = 1.0;
 	float filterReleaseDuration = 0.1;
-	float filterEnvelopeStrength = 0.0;
-//	float filterLFODepth = 0.0;
-//	float filterLFORate = 0.0;
-
-
-
+	float filterEnvelopeStrength = 1.0;
 
 	UInt64 currentRunningIndex = 0;
 
-
-
-	// Think this is for creating Polyphony.   Probalby don't k
-
-//	std::vector< std::unique_ptr<NoteState> > noteStates;
-//	NoteState *playingNotes = nullptr;
-//	NoteState currentNote = NoteState();
-
+	// This may be a little confusing.
+	// This is AudioKit's version of the Parameter Ramper (which I think is based on Apple's older Parameter Ramper
+	// The default ramper that comes with the default AUv3 Extension is Apple's newer Parameter Ramper and was renamed
+	// ParameterRamper->AUv3ParameterRamper for this project, to avoid collisions with AK's current ParameterRamper (the older Parameter Ramper)
+	//
+	// tl/dr: This version of Parameter Ramper being used is an variation of an older one, that isn't weird to init,
+	// so the code stays simpler to understand.
+	//
 	ParameterRamper attackDurationRamper = 0.1;
 	ParameterRamper decayDurationRamper = 0.1;
 	ParameterRamper sustainLevelRamper = 1.0;
 	ParameterRamper releaseDurationRamper = 0.1;
 	ParameterRamper pitchBendRamper = 0;
-//	ParameterRamper vibratoDepthRamper = 0;
-//	ParameterRamper vibratoRateRamper = 0;
 	ParameterRamper pulseWidthRamper = 0.5;
 	ParameterRamper filterCutoffFrequencyRamper = 0.1;
-//	ParameterRamper filterResonanceRamper = 0.1;
 	ParameterRamper filterAttackDurationRamper = 0.1;
 	ParameterRamper filterDecayDurationRamper = 0.1;
 	ParameterRamper filterSustainLevelRamper = 1.0;
 	ParameterRamper filterReleaseDurationRamper = 0.1;
 	ParameterRamper filterEnvelopeStrengthRamper = 0.0;
-//	ParameterRamper filterLFODepthRamper = 0;
-//	ParameterRamper filterLFORateRamper = 0;
 
 	AudioBufferList *outBufferListPtr = nullptr;
 
 	BasicSynth2DSPKernel() {
-		std::cout << "BasicSynth2DSPKernel Contructor Empty" << std::endl;
+		std::cout << "BasicSynth2DSPKernel Constructor" << std::endl;
 
 		sp_blsquare_create(&blsquare);
 		sp_adsr_create(&adsr);
 		sp_butlp_create(&filter);
 		sp_adsr_create(&filterEnv);
 
-//		noteStates.resize(128);
-//		for (auto& ns : noteStates) {
-//			ns.reset(new NoteState);
-//			ns->kernel = this;
-//		}
-
 	};
 
-
-//	BasicSynth2DSPKernel(int channelCount, double sampleRate) {
-//
-//		std::cout << "Built Kernel STANDARD" << std::endl;
-//
-//		sp_create(&sp);
-//		sp->sr = sampleRate;
-//		sp->nchan = channelCount;
-//
-//		noteStates.resize(128);
-//
-//		for (auto& ns : noteStates) {
-//			ns.reset(new NoteState);
-//			ns->kernel = this;
-//		}
-//	}
-
-
 	~BasicSynth2DSPKernel() {
+		std::cout << "BasicSynth2DSPKernel Destroyer!" << std::endl;
+
 		//printf("~BasicSynth2DSPKernel(), &sp is %p\n", (void *)sp);
 		// releasing the memory in the destructor only
 		sp_blsquare_destroy(&blsquare);
@@ -248,7 +125,6 @@ public:
 	}
 
 	void init(int channelCount, double sampleRate) {
-
 		std::cout << "BasicSynth2DSPKernel init Called" << std::endl;
 
 		channels = channelCount;
@@ -273,26 +149,20 @@ public:
 		sp_butlp_init(this->getSpData(), filter);
 		filter->freq = 22050.0;
 
-
 		attackDurationRamper.init();
 		decayDurationRamper.init();
 		sustainLevelRamper.init();
 		releaseDurationRamper.init();
 		pitchBendRamper.init();
 		pulseWidthRamper.init();
-//		vibratoDepthRamper.init();
-//		vibratoRateRamper.init();
 		filterCutoffFrequencyRamper.init();
-//		filterResonanceRamper.init();
 		filterAttackDurationRamper.init();
 		filterDecayDurationRamper.init();
 		filterSustainLevelRamper.init();
 		filterReleaseDurationRamper.init();
 		filterEnvelopeStrengthRamper.init();
-//		filterLFODepthRamper.init();
-//		filterLFORateRamper.init();
-	}
 
+	}
 
 	void destroy() {
 		std::cout << "Destorying BasicSynth2DSPKernel" << std::endl;
@@ -313,30 +183,52 @@ public:
 		return sp;
 	}
 
+	// Normal MIDI off, not running mode.
+	// Mainly used for MIDI Panic
+	void noteOff(int noteNumber, int velocity) {
+
+		std::cout << "noteOff() " << std::to_string(noteNumber) + " " + std::to_string(velocity) << std::endl;
+
+		stage = stageRelease;
+		internalGate = 0;
+	}
+
 
 	void noteOn(int noteNumber, int velocity) {
 		noteOn(noteNumber, velocity, (float)noteToHz(noteNumber));
 	}
 
 	void noteOn(int noteNumber, int velocity, float frequency) {
+		std::cout << "noteOn() " << std::to_string(noteNumber) + " " + std::to_string(velocity) << std::endl;
+
 		if (velocity == 0) {
-			if (stage == stageOn) {
+			// For check for running mode midi off.
+			if (stage == stageOn && currentNoteNumber == noteNumber) {
+
+				std::cout << "	Note Release" << std::endl;
+
 				stage = stageRelease;
 				internalGate = 0;
 			}
 		} else {
+			std::cout << "	Note Attack" << std::endl;
 			stage = stageOn;
 			internalGate = 1;
+
+			currentNoteNumber = noteNumber;
+
 		}
 
 		if (velocity != 0) {
+
+			currentNoteNumber = noteNumber;
+
 			*blsquare->freq = frequency;
 			*blsquare->amp = (float)pow2(velocity / 127.);
 		}
 	}
 
 	void run(int frameCount, float *outL, float *outR) {
-//		auto filteredSynthKernel = (BasicSynth2DSPKernel*)kernel;
 
 		float originalFrequency = *blsquare->freq;
 		*blsquare->freq *= powf(2, this->pitchBend / 12.0);
@@ -351,6 +243,7 @@ public:
 		adsr->rel = (float)this->releaseDuration;
 
 		float sff = (float)this->filterCutoffFrequency;
+		filter->freq = (float)this->filterCutoffFrequency;
 		float filterStrength = this->filterEnvelopeStrength;
 
 		filter->freq = sff;
@@ -362,20 +255,17 @@ public:
 
 		for (int frameIndex = 0; frameIndex < frameCount; ++frameIndex) {
 			float x = 0;
-			//				float depth = kernel->vibratoDepth / 12.0;
-			//				float variation = sinf((kernel->currentRunningIndex + frameIndex) * 2 * 2 * M_PI * kernel->vibratoRate / kernel->getSampleRate());
-			//				*blsquare->freq = bentFrequency * powf(2, depth * variation);
+
 			*blsquare->freq = bentFrequency;
 			sp_adsr_compute(this->getSpData(), adsr, &internalGate, &amp);
 			sp_blsquare_compute(this->getSpData(), blsquare, nil, &x);
 
 			float xf = 0;
-//			float filterDepth = this->filterLFODepth;
-//			float filterRate = sinf((this->currentRunningIndex + frameIndex) * 2 * 2 * M_PI * this->filterLFORate / this->getSampleRate());
 
-//			float filterFreq = clamp(sff * powf(2, filterDepth * filterRate), 0.0f, 22050.0f);
 			float filterFreq = clamp(sff, 0.0f, 22050.0f);
+
 			sp_adsr_compute(this->getSpData(), filterEnv, &internalGate, &filterAmp);
+
 			filterAmp = filterAmp * filterStrength;
 			filter->freq = filterFreq + ((22050.0f - filterFreq) * filterAmp);
 
@@ -385,11 +275,13 @@ public:
 			*outL++ += amp * xf;
 			*outR++ += amp * xf;
 		}
+
 		*blsquare->freq = originalFrequency;
+
 		if (stage == stageRelease && amp < 0.00001) {
 			clear();
-			//				remove();
 		}
+
 	}
 
 
@@ -398,38 +290,34 @@ public:
 		if (midiEvent.length != 3) return;
 		uint8_t status = midiEvent.data[0] & 0xF0;
 
-		std::cout << std::to_string(midiEvent.data[0]) + " " + std::to_string(midiEvent.data[1]) + " " + std::to_string(midiEvent.data[2]) << std::endl;
-
 		switch (status) {
 			case 0x80 : {
+
+				std::cout << "MIDI Note Off. " + std::to_string(midiEvent.data[0]) + " " + std::to_string(midiEvent.data[1]) + " " + std::to_string(midiEvent.data[2]) << std::endl;
+
 				uint8_t note = midiEvent.data[1];
 				if (note > 127) break;
-//				noteStates[note]->noteOn(note, 0);
 				this->noteOn(note, 0);
 				break;
 			}
 			case 0x90 : {
+
+				std::cout << "MIDI Note ON!  " + std::to_string(midiEvent.data[0]) + " " + std::to_string(midiEvent.data[1]) + " " + std::to_string(midiEvent.data[2]) << std::endl;
+
 				uint8_t note = midiEvent.data[1];
 				uint8_t veloc = midiEvent.data[2];
 				if (note > 127 || veloc > 127) break;
-//				noteStates[note]->noteOn(note, veloc);
 				this->noteOn(note, veloc);
 				break;
 			}
 			case 0xB0 : {
-				uint8_t num = midiEvent.data[1];
-				std::cout << "B0 Received " << std::to_string(num) << std::endl;
 
-//				if (num == 123) {
-//					NoteState *noteState = playingNote;
-//					while (noteState) {
-//						noteState->clear();
-//						noteState = noteState->next;
-//					}
-//					playingNotes = nullptr;
-//					playingNotesCount = 0;
-//				}
-//				currentNote->noteOn(note, 0);
+				std::cout << "MIDI CC! " + std::to_string(midiEvent.data[0]) + " " + std::to_string(midiEvent.data[1]) + " " + std::to_string(midiEvent.data[2]) << std::endl;
+
+				uint8_t cc = midiEvent.data[1];
+				uint8_t cc_value = midiEvent.data[2];
+
+				std::cout << "CC Received " << std::to_string(cc) + " " + std::to_string(cc_value) << std::endl;
 
 				break;
 			}
@@ -452,18 +340,10 @@ public:
 		float *outL = (float *)outBufferListPtr->mBuffers[0].mData + bufferOffset;
 		float *outR = (float *)outBufferListPtr->mBuffers[1].mData + bufferOffset;
 
-		pulseWidth = double(pulseWidthRamper.getAndStep());
-
 		standardFilterSynthGetAndSteps();
 
-
-//		NoteState noteState = bsCurrentNote;
-//		while (noteState) {
-
 		this->run(frameCount, outL, outR);
-//			noteState.run(frameCount, outL, outR);
-//			noteState = noteState->next;
-//		}	
+
 		currentRunningIndex += frameCount / 2;
 
 		for (AUAudioFrameCount i = 0; i < frameCount; ++i) {
@@ -511,11 +391,6 @@ public:
 
 
 	void reset() {
-//		for (auto& state : noteStates) state->clear();
-//		playingNotes = nullptr;
-//		playingNotesCount = 0;
-
-//		currentNote = NoteState();
 
 		resetted = true;
 
@@ -524,24 +399,21 @@ public:
 		sustainLevelRamper.reset();
 		releaseDurationRamper.reset();
 		pitchBendRamper.reset();
-//		vibratoDepthRamper.reset();
-//		vibratoRateRamper.reset();
 
 		pulseWidthRamper.reset();
 
 		filterCutoffFrequencyRamper.reset();
-//		filterResonanceRamper.reset();
 		filterAttackDurationRamper.reset();
 		filterDecayDurationRamper.reset();
 		filterSustainLevelRamper.reset();
 		filterReleaseDurationRamper.reset();
 		filterEnvelopeStrengthRamper.reset();
 
-//		filterLFODepthRamper.reset();
-//		filterLFORateRamper.reset();
 	}
 
 
+	// MARK: - Set Parameters
+	// This is the access point for the parameters
 	void setParameter(AUParameterAddress address, AUValue value) {
 		switch (address) {
 			case AttackDurationAddress:
@@ -559,21 +431,14 @@ public:
 			case PitchBendAddress:
 				pitchBendRamper.setUIValue(clamp(value, (float)-24, (float)24));
 				break;
-				//			case vibratoDepthAddress:
-				//				vibratoDepthRamper.setUIValue(clamp(value, (float)0, (float)24));
-				//				break;
-				//			case vibratoRateAddress:
-				//				vibratoRateRamper.setUIValue(clamp(value, (float)0, (float)600));
-				//				break;
 			case PulseWidthAddress:
-				pulseWidthRamper.setUIValue(clamp(value, 0.0f, 1.0f));
+				pulseWidth = clamp(value, 0.01f, 0.5f);
+				pulseWidthRamper.setImmediate(pulseWidth);
 				break;
 			case FilterCutoffFrequencyAddress:
-				filterCutoffFrequencyRamper.setUIValue(clamp(value, 0.0f, 22050.0f));
+				filterCutoffFrequency = clamp(value, 1.0f, 22050.0f);
+				filterCutoffFrequencyRamper.setImmediate(filterCutoffFrequency);
 				break;
-				//			case filterResonanceAddress:
-				//				filterResonanceRamper.setUIValue(clamp(value, 0.0f, 0.99f));
-				//				break;
 			case FilterAttackDurationAddress:
 				filterAttackDurationRamper.setUIValue(clamp(value, 0.0f, 99.0f));
 				break;
@@ -589,12 +454,6 @@ public:
 			case FilterEnvelopeStrengthAddress:
 				filterEnvelopeStrengthRamper.setUIValue(clamp(value, 0.0f, 1.0f));
 				break;
-//			case filterLFODepthAddress:
-//				filterLFODepthRamper.setUIValue(clamp(value, 0.0f, 1.0f));
-//				break;
-//			case filterLFORateAddress:
-//				filterLFORateRamper.setUIValue(clamp(value, 0.0f, 600.0f));
-//				break;
 		}
 	}
 
@@ -611,16 +470,10 @@ public:
 				return releaseDurationRamper.getUIValue();
 			case PitchBendAddress:
 				return pitchBendRamper.getUIValue();
-//			case vibratoDepthAddress:
-//				return vibratoDepthRamper.getUIValue();
-//			case vibratoRateAddress:
-//				return vibratoRateRamper.getUIValue();
 			case PulseWidthAddress:
 				return pulseWidthRamper.getUIValue();
 			case FilterCutoffFrequencyAddress:
 				return filterCutoffFrequencyRamper.getUIValue();
-//			case filterResonanceAddress:
-//				return filterResonanceRamper.getUIValue();
 			case FilterAttackDurationAddress:
 				return filterAttackDurationRamper.getUIValue();
 			case FilterDecayDurationAddress:
@@ -631,26 +484,17 @@ public:
 				return filterReleaseDurationRamper.getUIValue();
 			case FilterEnvelopeStrengthAddress:
 				return filterEnvelopeStrengthRamper.getUIValue();
-//			case filterLFODepthAddress:
-//				return filterLFODepthRamper.getUIValue();
-//			case filterLFORateAddress:
-//				return filterLFORateRamper.getUIValue();
 			default: return 0.0f;
 		}
 	}
 
-
-
-
 	void setBuffers(AudioBufferList* inBufferList, AudioBufferList* outBufferList) {
-//		inBufferListPtr = inBufferList;
 		outBufferListPtr = outBufferList;
 	}
 
 	void setOutputBuffer(AudioBufferList* outBufferList) {
 		outBufferListPtr = outBufferList;
 	}
-
 
 	void setAttackDuration(float value) {
 		attackDuration = clamp(value, 0.0f, 99.0f);
@@ -682,25 +526,10 @@ public:
 		pitchBendRamper.setImmediate(pitchBend);
 	}
 
-//	void setVibratoDepth(float value) {
-//		vibratoDepth = clamp(value, (float)0, (float)24);
-//		vibratoDepthRamper.setImmediate(vibratoDepth);
-//	}
-//
-//	void setVibratoRate(float value) {
-//		vibratoRate = clamp(value, (float)0, (float)600);
-//		vibratoRateRamper.setImmediate(vibratoRate);
-//	}
-
 	void setFilterCutoffFrequency(float value) {
 		filterCutoffFrequency = clamp(value, 0.0f, 22050.0f);
 		filterCutoffFrequencyRamper.setImmediate(filterCutoffFrequency);
 	}
-
-//	void setFilterResonance(float value) {
-//		filterResonance = clamp(value, 0.0f, 0.99f);
-//		filterResonanceRamper.setImmediate(filterResonance);
-//	}
 
 	void setFilterAttackDuration(float value) {
 		filterAttackDuration = clamp(value, 0.0f, 99.0f);
@@ -727,37 +556,20 @@ public:
 		filterEnvelopeStrengthRamper.setImmediate(filterEnvelopeStrength);
 	}
 
-//	void setFilterLFODepth(float value) {
-//		filterLFODepth = clamp(value, 0.0f, 1.0f);
-//		filterLFODepthRamper.setImmediate(filterLFODepth);
-//	}
-//
-//	void setFilterLFORate(float value) {
-//		filterLFORate = clamp(value, 0.0f, 600.0f);
-//		filterLFORateRamper.setImmediate(filterLFORate);
-//	}
-
-
-
 	void standardFilterSynthGetAndSteps() {
 		attackDuration = attackDurationRamper.getAndStep();
 		decayDuration = decayDurationRamper.getAndStep();
 		sustainLevel = sustainLevelRamper.getAndStep();
 		releaseDuration = releaseDurationRamper.getAndStep();
 		pitchBend = double(pitchBendRamper.getAndStep());
-//		vibratoDepth = double(vibratoDepthRamper.getAndStep());
-//		vibratoRate = double(vibratoRateRamper.getAndStep());
+		pulseWidth = double(pulseWidthRamper.getAndStep());
 		filterCutoffFrequency = double(filterCutoffFrequencyRamper.getAndStep());
-//		filterResonance = double(filterResonanceRamper.getAndStep());
 		filterAttackDuration = filterAttackDurationRamper.getAndStep();
 		filterDecayDuration = filterDecayDurationRamper.getAndStep();
 		filterSustainLevel = filterSustainLevelRamper.getAndStep();
 		filterReleaseDuration = filterReleaseDurationRamper.getAndStep();
 		filterEnvelopeStrength = filterEnvelopeStrengthRamper.getAndStep();
-//		filterLFODepth = filterLFODepthRamper.getAndStep();
-//		filterLFORate = filterLFORateRamper.getAndStep();
 	}
-
 
 	void startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) {
 		switch (address) {
@@ -776,21 +588,12 @@ public:
 			case PitchBendAddress:
 				pitchBendRamper.startRamp(clamp(value, (float)-24, (float)24), duration);
 				break;
-//			case vibratoDepthAddress:
-//				vibratoDepthRamper.startRamp(clamp(value, (float)0, (float)24), duration);
-//				break;
-//			case vibratoRateAddress:
-//				vibratoRateRamper.startRamp(clamp(value, (float)0, (float)600), duration);
-//				break;
 			case PulseWidthAddress:
 				pulseWidthRamper.startRamp(clamp(value, 0.0f, 1.0f), duration);
 				break;
 			case FilterCutoffFrequencyAddress:
 				filterCutoffFrequencyRamper.startRamp(clamp(value, 0.0f, 22050.0f), duration);
 				break;
-//			case filterResonanceAddress:
-//				filterResonanceRamper.startRamp(clamp(value, 0.0f, 0.99f), duration);
-//				break;
 			case FilterAttackDurationAddress:
 				filterAttackDurationRamper.startRamp(clamp(value, 0.0f, 99.0f), duration);
 				break;
@@ -806,30 +609,7 @@ public:
 			case FilterEnvelopeStrengthAddress:
 				filterEnvelopeStrengthRamper.startRamp(clamp(value, 0.0f, 1.0f), duration);
 				break;
-//			case filterLFODepthAddress:
-//				filterLFODepthRamper.startRamp(clamp(value, 0.0f, 1.0f), duration);
-//				break;
-//			case filterLFORateAddress:
-//				filterLFORateRamper.startRamp(clamp(value, 0.0f, 600.0f), duration);
-//				break;
 		}
-	}
-
-
-	// standard filter synth kernel functions
-	void startNote(int note, int velocity) {
-//		noteStates[note]->noteOn(note, velocity);
-		this->noteOn(note, velocity);
-	}
-
-	void startNote(int note, int velocity, float frequency) {
-//		noteStates[note]->noteOn(note, velocity, frequency);
-		this->noteOn(note, velocity, frequency);
-	}
-
-	void stopNote(int note) {
-//		noteStates[note]->noteOn(note, 0);
-		this->noteOn(note, 0);
 	}
 
 	static inline double noteToHz(int noteNumber) {
@@ -844,8 +624,6 @@ public:
 private:
 
 	AUAudioFrameCount maxFramesToRender = 512;
-
-
 
 	void handleOneEvent(AURenderEvent const *event) {
 		switch (event->head.eventType) {

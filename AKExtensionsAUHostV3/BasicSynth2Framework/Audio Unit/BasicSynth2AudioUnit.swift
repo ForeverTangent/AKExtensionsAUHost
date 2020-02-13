@@ -10,8 +10,11 @@ import Foundation
 import AudioToolbox
 import AVFoundation
 import CoreAudioKit
+import AudioKit
 
 public class BasicSynth2AudioUnit: AUAudioUnit {
+
+	public static let ComponentDescription = AudioComponentDescription(instrument: "bas2")
 
     private let parameters: BasicSynth2AudioUnitParameters
     private let kernelAdapter: BasicSynth2DSPKernelAdapter
@@ -22,18 +25,21 @@ public class BasicSynth2AudioUnit: AUAudioUnit {
                             busses: [kernelAdapter.outputBus])
     }()
 
-    /// The units output busses
+    /// The unit's output busses
     public override var outputBusses: AUAudioUnitBusArray {
         return outputBusArray
     }
 
+	// The owning view controller
+	weak var viewController: BasicSynth2AudioUnitViewController?
+
+
     /// The tree of parameters provided by this AU.
     public override var parameterTree: AUParameterTree? {
-        get {
-            return parameters.parameterTree
-        }
+        get { return parameters.parameterTree }
         set { }
     }
+
 
     public override init(componentDescription: AudioComponentDescription,
                          options: AudioComponentInstantiationOptions = []) throws {
@@ -107,6 +113,8 @@ public class BasicSynth2AudioUnit: AUAudioUnit {
     public override var canProcessInPlace: Bool {
         return true
     }
+
+
 }
 
 extension FourCharCode {

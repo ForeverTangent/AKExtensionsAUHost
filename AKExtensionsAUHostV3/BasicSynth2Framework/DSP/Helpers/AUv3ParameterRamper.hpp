@@ -10,6 +10,9 @@ Utility class to manage DSP parameters which can change value smoothly (be rampe
 
 // N.B. This is C++.
 
+// AUv3ParameterRamper was originally named ParameterRamper.  Name was changed to AUv3ParameterRamper to avoid
+// name collisions with AudioKit's ParameterRamper (which is actually a modified earlier version of this ParameterRamper.
+
 #import <AudioToolbox/AudioToolbox.h>
 #import <libkern/OSAtomic.h>
 

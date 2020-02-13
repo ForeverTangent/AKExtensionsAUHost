@@ -29,10 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property double rampDuration;
 
-//- (void)startNote:(uint8_t)note velocity:(uint8_t)velocity;
-//- (void)startNote:(uint8_t)note velocity:(uint8_t)velocity frequency:(float)frequency;
-//- (void)stopNote:(uint8_t)note;
-
 - (void)setParameter:(AUParameter *)parameter value:(AUValue)value;
 - (AUValue)valueForParameter:(AUParameter *)parameter;
 
@@ -44,24 +40,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-//@interface AUParameter(BasicSynth2)
-//
-//+(_Nonnull instancetype)parameterWithIdentifier:(NSString * _Nonnull)identifier
-//										   name:(NSString * _Nonnull)name
-//										address:(AUParameterAddress)address
-//											min:(AUValue)min
-//											max:(AUValue)max
-//										   unit:(AudioUnitParameterUnit)unit
-//										  flags:(AudioUnitParameterOptions)flags;
-//
-//+(_Nonnull instancetype)parameterWithIdentifier:(NSString * _Nonnull)identifier
-//										   name:(NSString * _Nonnull)name
-//										address:(AUParameterAddress)address
-//											min:(AUValue)min
-//											max:(AUValue)max
-//										   unit:(AudioUnitParameterUnit)unit;
-//@end
-//
-//@interface AUParameterTree(BasicSynth2)
-//+(_Nonnull instancetype)treeWithChildren:(NSArray<AUParameter *> * _Nonnull)children;
-//@end

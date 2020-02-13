@@ -84,7 +84,7 @@
 
 - (void)allocateRenderResources {
 
-	NSLog(@"BasicSynth2DSPKernelAdapter allocateRenderResources PLAIN");
+	NSLog(@"BasicSynth2DSPKernelAdapter allocateRenderResources2");
 	_outputBusBuffer.allocateRenderResources(self.maximumFramesToRender);
 	_kernel.init(self.outputBus.format.channelCount, self.outputBus.format.sampleRate);
 	_kernel.reset();
@@ -105,22 +105,10 @@
 //}
 
 - (void)deallocateRenderResources {
-	NSLog(@"BasicSynth2DSPKernelAdapter deallocateRenderResources \\/");
+	NSLog(@"BasicSynth2DSPKernelAdapter deallocateRenderResources");
 	_kernel.destroy();
 	_outputBusBuffer.deallocateRenderResources();
 }
-
-//- (void)stopNote:(uint8_t)note {
-//	_kernel.stopNote(note);
-//}
-//
-//- (void)startNote:(uint8_t)note velocity:(uint8_t)velocity {
-//	_kernel.startNote(note, velocity);
-//}
-//
-//- (void)startNote:(uint8_t)note velocity:(uint8_t)velocity frequency:(float)frequency {
-//	_kernel.startNote(note, velocity, frequency);
-//};
 
 #pragma mark - AUAudioUnit (AUAudioUnitImplementation internalRenderBlock)
 

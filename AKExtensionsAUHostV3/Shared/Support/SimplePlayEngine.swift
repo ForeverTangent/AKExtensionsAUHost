@@ -17,7 +17,7 @@ public class SimplePlayEngine {
 
     // Synchronizes starting/stopping the engine and scheduling file segments.
     private let stateChangeQueue = DispatchQueue(label: "com.example.apple-samplecode.StateChangeQueue")
-    
+
     // Playback engine.
     private let engine = AVAudioEngine()
     
@@ -29,7 +29,10 @@ public class SimplePlayEngine {
     
     // Whether we are playing.
     private var isPlaying = false
-    
+
+	// for Midi
+	private var akMidi = AudioKit.midi
+
     // This block will be called every render cycle and will receive MIDI events
     private let midiOutBlock: AUMIDIOutputEventBlock = { sampleTime, cable, length, data in return noErr }
 
@@ -50,6 +53,9 @@ public class SimplePlayEngine {
     // MARK: Initialization
 
     public init() {
+
+		setUpAKMidi()
+
         engine.attach(player)
 
         guard let fileURL = Bundle.main.url(forResource: "Synth", withExtension: "aif") else {
@@ -58,6 +64,7 @@ public class SimplePlayEngine {
         setPlayerFile(fileURL)
 
         engine.prepare()
+
     }
 
     private func setPlayerFile(_ fileURL: URL) {
@@ -90,18 +97,17 @@ public class SimplePlayEngine {
         }
     }
 
+	public func stopPlaying() {
+		stateChangeQueue.sync {
+			if self.isPlaying { self.stopPlayingInternal() }
+		}
+	}
+
 	public func startMIDIPlaying() {
 		stateChangeQueue.sync {
 			if !self.isPlaying { self.startMIDIPlayingInternal() }
 		}
 	}
-
-    public func stopPlaying() {
-        stateChangeQueue.sync {
-			self.stopMIDIPlayingInternal()
-            if self.isPlaying { self.stopPlayingInternal() }
-        }
-    }
 
 	public func stopMIDIPlaying() {
 		stateChangeQueue.sync {
@@ -147,7 +153,6 @@ public class SimplePlayEngine {
 
 		if isInstrument {
 			instrumentPlayer = InstrumentPlayer(audioUnit: activeAVAudioUnit?.auAudioUnit)
-			instrumentPlayer?.midiPlay()
 		}
 
 		isPlaying = true
@@ -186,15 +191,24 @@ public class SimplePlayEngine {
     }
 
 	private func stopMIDIPlayingInternal() {
+
+		print("stopMIDIPlayingInternal()")
+
 		if isInstrument {
 			instrumentPlayer?.stop()
 		}
+
 		engine.stop()
 		isPlaying = false
 		setSessionActive(false)
+
+
 	}
 
     private func stopPlayingInternal() {
+
+		print("stopPlayingInternal()")
+
         if isEffect {
             player.stop()
         } else if isInstrument {
@@ -310,12 +324,19 @@ public class SimplePlayEngine {
         rewiringComplete()
     }
 
+
+	func setUpAKMidi() {
+
+		print("setUpAKMidi()")
+
+		akMidi.openInput()
+		akMidi.addListener(self)
+	}
+
     // MARK: InstrumentPlayer
 
     /// Simple MIDI note generator that plays a two-octave scale.
     public class InstrumentPlayer {
-
-		private var midi = AudioKit.midi
 
         private var isPlaying = false
         private var isDone = false
@@ -324,14 +345,9 @@ public class SimplePlayEngine {
         init?(audioUnit: AUAudioUnit?) {
             guard let audioUnit = audioUnit else { return nil }
             guard let theNoteBlock = audioUnit.scheduleMIDIEventBlock else { return nil }
+
             noteBlock = theNoteBlock
-
-//			setUpAKMidi()
         }
-
-		func midiPlay() {
-			isPlaying = true
-		}
 
         func play() {
             if !isPlaying {
@@ -342,6 +358,9 @@ public class SimplePlayEngine {
 
         @discardableResult
         func stop() -> Bool {
+
+			print("InstrumentPlayer.stop()")
+
             isPlaying = false
             synced(isDone) {}
             return isDone
@@ -354,12 +373,37 @@ public class SimplePlayEngine {
         }
 
 
-		private func scheduleInstrumentNote(on: Bool,
+		public func scheduleCCFor(_ cc: UInt8, with data: UInt8) {
+			isPlaying = true
+
+			print("scheduleCCFor( \(cc), \(data)")
+
+			let cbytes = UnsafeMutablePointer<UInt8>.allocate(capacity: 3)
+
+			DispatchQueue.global(qos: .default).async {
+
+				cbytes[0] = 0xB0 // status note on/off
+				cbytes[1] = cc // note
+				cbytes[2] = data // velocity
+				self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
+
+				self.synced(self.isDone) {
+					self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
+				} // while isPlaying
+
+				self.isDone = true
+				cbytes.deallocate()
+			}
+		}
+
+
+
+		public func scheduleInstrumentNote(on: Bool,
 											noteNumber: UInt8,
 											at velocity: UInt8) {
 			isPlaying = true
 
-			print("scheduleInstrumentNoteFor( \(noteNumber), \(velocity)")
+			print("scheduleInstrumentNoteFor() \(noteNumber) at \(velocity)")
 
 			let cbytes = UnsafeMutablePointer<UInt8>.allocate(capacity: 3)
 
@@ -459,15 +503,11 @@ public class SimplePlayEngine {
             }
         }
     }
+
 }
 
 
-extension SimplePlayEngine.InstrumentPlayer: AKMIDIListener {
-
-	func setUpAKMidi() {
-		midi.openInput()
-		midi.addListener(self)
-	}
+extension SimplePlayEngine: AKMIDIListener {
 
 	public func receivedMIDINoteOn(noteNumber: MIDINoteNumber,
 								   velocity: MIDIVelocity,
@@ -476,8 +516,9 @@ extension SimplePlayEngine.InstrumentPlayer: AKMIDIListener {
 								   offset: MIDITimeStamp = 0) {
 		updateText("Channel: \(channel + 1) noteOn: \(noteNumber) velocity: \(velocity) ")
 
-		if isPlaying {
-			scheduleInstrumentNote(on: true, noteNumber: noteNumber, at: velocity)
+		if let theInstrumentPlayer = instrumentPlayer,
+			isPlaying {
+			theInstrumentPlayer.scheduleInstrumentNote(on: true, noteNumber: noteNumber, at: velocity)
 		}
 
 
@@ -490,8 +531,9 @@ extension SimplePlayEngine.InstrumentPlayer: AKMIDIListener {
 									offset: MIDITimeStamp = 0) {
 		updateText("Channel: \(channel + 1) noteOff: \(noteNumber) velocity: \(velocity) ")
 
-		if isPlaying {
-			scheduleInstrumentNote(on: false, noteNumber: noteNumber, at: velocity)
+		if let theInstrumentPlayer = instrumentPlayer,
+			isPlaying {
+			theInstrumentPlayer.scheduleInstrumentNote(on: false, noteNumber: noteNumber, at: velocity)
 		}
 
 	}
@@ -502,6 +544,10 @@ extension SimplePlayEngine.InstrumentPlayer: AKMIDIListener {
 									   portID: MIDIUniqueID? = nil,
 									   offset: MIDITimeStamp = 0) {
 		updateText("Channel: \(channel + 1) controller: \(controller) value: \(value) ")
+		if let theInstrumentPlayer = instrumentPlayer,
+			isPlaying {
+			theInstrumentPlayer.scheduleCCFor(controller, with: value)
+		}
 	}
 
 	public func receivedMIDIAftertouch(noteNumber: MIDINoteNumber,
