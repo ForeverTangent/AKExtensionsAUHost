@@ -164,7 +164,7 @@ class AudioUnitManager {
     }
 
     /// The playback engine used to play audio.
-    private let playEngine = SimplePlayEngine()
+	private let playEngine = SimplePlayEngine()
 
     private var options = AudioComponentInstantiationOptions.loadOutOfProcess
 
@@ -317,6 +317,7 @@ class AudioUnitManager {
                 return
             }
             self.audioUnit = avAudioUnit?.auAudioUnit
+
             self.playEngine.connect(avAudioUnit: avAudioUnit) {
                 DispatchQueue.main.async {
                     completion(.success(true))

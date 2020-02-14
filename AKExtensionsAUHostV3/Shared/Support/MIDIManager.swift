@@ -15,6 +15,12 @@ import AVFoundation
 import os.log
 
 
+protocol MIDIManagerDelegate {
+	func scheduleAMIDINote(on: Bool, noteNumber: UInt8, at velocity: UInt8)
+	func scheduleACCFor(_ cc: UInt8, with data: UInt8)
+}
+
+
 /// The `Singleton` instance
 class MIDIManager {
 
@@ -35,6 +41,8 @@ class MIDIManager {
 	var midiInputPortRef = MIDIPortRef()
 
 	var processingGraph:AUGraph?
+
+	var midiManagerDelegate: MIDIManagerDelegate?
 
 	init() {
 		// initializer code here
@@ -571,7 +579,8 @@ class MIDIManager {
 	func playNoteOn(_ channel:UInt32, noteNum:UInt32, velocity:UInt32)    {
 		let noteCommand = UInt32(0x90 | channel)
 
-		
+		midiManagerDelegate?.scheduleAMIDINote(on: true, noteNumber: UInt8(noteNum), at: UInt8(velocity))
+
 //		if let sampler = self.samplerUnit {
 //			let status = MusicDeviceMIDIEvent(sampler, noteCommand, noteNum, velocity, 0)
 //			checkError(status)
@@ -586,6 +595,8 @@ class MIDIManager {
 //			let status = MusicDeviceMIDIEvent(sampler, noteCommand, noteNum, 0, 0)
 //			checkError(status)
 //		}
+
+		midiManagerDelegate?.scheduleAMIDINote(on: false, noteNumber: UInt8(noteNum), at: 0)
 
 		print("\(noteCommand)")
 

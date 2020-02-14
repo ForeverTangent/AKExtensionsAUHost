@@ -297,7 +297,7 @@ public:
 
 				uint8_t note = midiEvent.data[1];
 				if (note > 127) break;
-				this->noteOn(note, 0);
+				this->noteOff(note, 0);
 				break;
 			}
 			case 0x90 : {
