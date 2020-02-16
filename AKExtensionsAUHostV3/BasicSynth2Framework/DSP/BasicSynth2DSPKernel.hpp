@@ -10,8 +10,6 @@
 #define BasicSynth2DSPKernel_hpp
 
 #import <AudioKit/AudioKit.h>
-#import "AUv3DSPKernel.hpp"
-#import "AUv3ParameterRamper.hpp"
 
 #include <iostream>
 

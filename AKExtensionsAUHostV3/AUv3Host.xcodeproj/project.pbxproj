@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31249AD823EDF7CF00203B60 /* AUv3ParameterRamper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 31249AD723EDF7CF00203B60 /* AUv3ParameterRamper.hpp */; };
 		31249ADA23EDFB3E00203B60 /* BasicSynth2DSPKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31249AD923EDFB3E00203B60 /* BasicSynth2DSPKernelAdapter.mm */; };
 		31249ADB23EE008D00203B60 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52E23EB644800E0FF70 /* AudioKit.framework */; };
 		31249ADC23EE008D00203B60 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F1A52E23EB644800E0FF70 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -21,8 +20,6 @@
 		31C79C5223EC74E70094A94A /* BasicSynth2AudioUnitViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C79C5123EC74E70094A94A /* BasicSynth2AudioUnitViewControllerExtension.swift */; };
 		31C79C5323EC75BA0094A94A /* BasicSynth2MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31C79C3523EC73D30094A94A /* BasicSynth2MainInterface.storyboard */; };
 		31C79C5423EC75C00094A94A /* BasicSynth2DSPKernel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 31C79C2823EC73D30094A94A /* BasicSynth2DSPKernel.hpp */; };
-		31C79C5623EC75CB0094A94A /* AUv3DSPKernel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 31C79C2123EC73D30094A94A /* AUv3DSPKernel.hpp */; };
-		31C79C5723EC75CD0094A94A /* AUv3DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31C79C2323EC73D30094A94A /* AUv3DSPKernel.mm */; };
 		31C79C5823EC75D00094A94A /* AUv3BufferedAudioBus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 31C79C2523EC73D30094A94A /* AUv3BufferedAudioBus.hpp */; };
 		31C79C5923EC75D20094A94A /* BasicSynth2DSPKernelAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C79C2723EC73D30094A94A /* BasicSynth2DSPKernelAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		31C79C5A23EC75D50094A94A /* BasicSynth2AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C79C2D23EC73D30094A94A /* BasicSynth2AudioUnitViewController.swift */; };
@@ -139,11 +136,8 @@
 /* Begin PBXFileReference section */
 		1266C3401266D06000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		138848D0138824C000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		31249AD723EDF7CF00203B60 /* AUv3ParameterRamper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AUv3ParameterRamper.hpp; sourceTree = "<group>"; };
 		31249AD923EDFB3E00203B60 /* BasicSynth2DSPKernelAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BasicSynth2DSPKernelAdapter.mm; sourceTree = "<group>"; };
 		31C79C1D23EC73D30094A94A /* BasicSynth2.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BasicSynth2.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		31C79C2123EC73D30094A94A /* AUv3DSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AUv3DSPKernel.hpp; sourceTree = "<group>"; };
-		31C79C2323EC73D30094A94A /* AUv3DSPKernel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AUv3DSPKernel.mm; sourceTree = "<group>"; };
 		31C79C2523EC73D30094A94A /* AUv3BufferedAudioBus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AUv3BufferedAudioBus.hpp; sourceTree = "<group>"; };
 		31C79C2723EC73D30094A94A /* BasicSynth2DSPKernelAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicSynth2DSPKernelAdapter.h; sourceTree = "<group>"; };
 		31C79C2823EC73D30094A94A /* BasicSynth2DSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BasicSynth2DSPKernel.hpp; sourceTree = "<group>"; };
@@ -271,10 +265,7 @@
 		31C79C2023EC73D30094A94A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				31C79C2123EC73D30094A94A /* AUv3DSPKernel.hpp */,
-				31C79C2323EC73D30094A94A /* AUv3DSPKernel.mm */,
 				31C79C2523EC73D30094A94A /* AUv3BufferedAudioBus.hpp */,
-				31249AD723EDF7CF00203B60 /* AUv3ParameterRamper.hpp */,
 				31C79C2723EC73D30094A94A /* BasicSynth2DSPKernelAdapter.h */,
 				31249AD923EDFB3E00203B60 /* BasicSynth2DSPKernelAdapter.mm */,
 			);
@@ -410,10 +401,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31C79C5623EC75CB0094A94A /* AUv3DSPKernel.hpp in Headers */,
 				31C79C5923EC75D20094A94A /* BasicSynth2DSPKernelAdapter.h in Headers */,
 				31C79C5823EC75D00094A94A /* AUv3BufferedAudioBus.hpp in Headers */,
-				31249AD823EDF7CF00203B60 /* AUv3ParameterRamper.hpp in Headers */,
 				31C79C5423EC75C00094A94A /* BasicSynth2DSPKernel.hpp in Headers */,
 				31C79C4923EC745C0094A94A /* BasicSynth2Framework.h in Headers */,
 			);
@@ -600,7 +589,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31C79C5723EC75CD0094A94A /* AUv3DSPKernel.mm in Sources */,
 				31C79C5B23EC75D70094A94A /* BasicSynth2AudioUnit.swift in Sources */,
 				31C79C5C23EC75DA0094A94A /* BasicSynth2AudioUnitParameters.swift in Sources */,
 				31249ADA23EDFB3E00203B60 /* BasicSynth2DSPKernelAdapter.mm in Sources */,
