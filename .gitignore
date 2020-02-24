@@ -8,3 +8,5 @@ AKExtensionsAUHostV1/Frameworks/AudioKit-macOS
 AKExtensionsAUHostV3/Frameworks/AudioKit-iOS
 AKExtensionsAUHostV3/Frameworks/AudioKit-macOS
 AKExtensionsAUHostV4/BUILDS
+AKExtensionsAUHostV4/Frameworks/AudioKit-iOS
+AKExtensionsAUHostV4/Frameworks/AudioKit-macOS
